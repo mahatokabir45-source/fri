@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friendship Greeting Card</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+    background: radial-gradient(circle at top left, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  }
+
+  .card {
+    width: 400px;
+    height: 260px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.2);
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 1s;
+  }
+
+  .card.open {
+    transform: rotateY(180deg);
+  }
+
+  .inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+  }
+
+  .card.open .inner {
+    transform: rotateY(180deg);
+  }
+
+  .front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    backface-visibility: hidden;
+  }
+
+  .front {
+    background: linear-gradient(135deg, #ffb6c1, #ffde59);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .front h1 {
+    font-size: 30px;
+    text-shadow: 0 0 10px #fff;
+  }
+
+  .front p {
+    font-size: 16px;
+    margin-top: 12px;
+  }
+
+  .back {
+    background: #fffaf0;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    padding: 25px;
+    text-align: center;
+  }
+
+  .back h2 {
+    color: #ff69b4;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .back p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #444;
+    font-weight: 500;
+    white-space: pre-line;
+  }
+
+  /* Floating glowing particles */
+  .particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    animation: floatUp 6s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <div class="inner">
+    <div class="front">
+      <h1>💫 Best Friends Forever 💫</h1>
+      <p>Click to open your card 💛</p>
+    </div>
+    <div class="font">
+      <h2>🌼 Happy Friendship Day 🌼</h2>
+      <p>True friends are rare, like diamonds 💎  
+You shine brighter with every smile you share.  
+Thanks for always being there, my friend! 💖</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const card = document.getElementById('card');
+  card.addEventListener('click', () => {
+    card.classList.toggle('open');
+  });
+
+  // Floating glowing particles
+  function createParticle() {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = 3 + Math.random() * 4 + 's';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 7000);
+  }
+
+  setInterval(createParticle, 300);
+</script>
+
+</body>
+</html>
